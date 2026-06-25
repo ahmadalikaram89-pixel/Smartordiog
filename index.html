@@ -1946,7 +1946,9 @@
 </script>
 
 <script>
+  let _datenschutzPrev = null;
   function showDatenschutz() {
+    _datenschutzPrev = document.getElementById('agb-page').style.display === 'block' ? 'agb' : 'main';
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('agb-page').style.display = 'none';
     document.getElementById('datenschutz-page').style.display = 'block';
@@ -1954,13 +1956,19 @@
   }
   function hideDatenschutz() {
     document.getElementById('datenschutz-page').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
+    if (_datenschutzPrev === 'agb') {
+      document.getElementById('agb-page').style.display = 'block';
+    } else {
+      document.getElementById('main-content').style.display = 'block';
+    }
+    _datenschutzPrev = null;
     window.scrollTo(0, 0);
   }
 
   // AGB
   function showAgb() {
     document.getElementById('main-content').style.display = 'none';
+    document.getElementById('datenschutz-page').style.display = 'none';
     document.getElementById('agb-page').style.display = 'block';
     window.scrollTo(0, 0);
   }
